@@ -1,48 +1,36 @@
 #include "sort.h"
-
 /**
- * selection_sort - Selection sort algorithm.
- *@array: array to be sorted
- *@size: no of elements in array.
+ * selection_sort - sorts an array in ascending order
+ * @array: array to be sorted
+ * @size: size of the array
  */
 void selection_sort(int *array, size_t size)
 {
-	int minvalue = 0, tmp = 0, flag;
-	size_t i, j;
+	size_t i = 0, j = -1, pos;
+	int aux, min, flag = 0;
 
-	for (j = 0; j < size - 1; j++)
+	if (!array || size <= 1)
+		return;
+	for (j = j + 1; j < size; j++)
 	{
 		flag = 0;
-		i = j;
-		for (; i < size - 1; i++)
+		min = array[j];
+		for (i = i + 1; i < size; i++)
 		{
-			if (flag == 0)
+			if (array[i] < min)
 			{
-				if (array[i] < array[i + 1])
-				{
-					flag = 1, minvalue = array[i];
-					tmp = i;
-				}
-				if (array[i] > array[i + 1])
-				{
-					flag = 1, minvalue = array[i + 1];
-					tmp = i + 1;
-				}
-			}
-			if (flag == 1)
-			{
-				if (minvalue < array[i + 1])
-				{
-				}
-				if (minvalue > array[i + 1])
-				{
-					flag = 1, minvalue = array[i + 1];
-					tmp = i + 1;
-				}
+				min = array[i];
+				pos = i;
+				flag = 1;
 			}
 		}
-		array[tmp] = array[j];
-		array[j] = minvalue;
-		print_array(array, size);
+		if (flag == 1)
+		{
+			aux = array[pos];
+			array[pos] = array[j];
+			array[j] = aux;
+			print_array(array, size);
+		}
+		i = j;
 	}
 }
