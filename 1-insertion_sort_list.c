@@ -1,38 +1,47 @@
 #include "sort.h"
 /**
- * insertion_sort_list - insertion sort algorithm
- * @list: head position of list
+ * insertion_sort_list - Insertion sort algorithm
+ * @list: header ptr
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *aux = *list;
-	listint_t *tmp = NULL;
+	listint_t *head = NULL, *tmp = NULL, *aux = NULL;
 
-	if (!list || !*list || (*list)->next == NULL)
-		return;
-	while (aux != NULL)
+	if (!list || !(*list))
+	return;
+
+	if ((*list)->next)
 	{
-		tmp = aux->next;
-		while (tmp != NULL && tmp->prev != NULL && tmp->n < tmp->prev->n)
+		head = (*list)->next;
+		tmp = head->prev;
+	}
+
+	while (tmp)
+	{
+		if (head == NULL)
+		tmp = tmp->next;
+		else
+		tmp = head->prev;
+
+		while (tmp && tmp->prev && tmp->n < tmp->prev->n)
 		{
-			if (tmp->prev != NULL)
-				tmp->prev->next = tmp->next;
-			if (tmp->next != NULL)
+			if (tmp->next)
 				tmp->next->prev = tmp->prev;
+
+			if (tmp->prev->prev)
+				tmp->prev->prev->next = tmp;
+			aux = tmp->next;
 			tmp->next = tmp->prev;
-			tmp->prev = tmp->next->prev;
-			if (tmp->prev != NULL)
-				tmp->prev->next = tmp;
-			if (tmp->prev == NULL)
-				*list = tmp;
-			if (tmp->next != NULL)
-				tmp->next->prev = tmp;
+			tmp->prev->next = aux;
+			aux = tmp->prev->prev;
+			tmp->prev->prev = tmp;
+			tmp->prev = aux;
+
+			if ((*list)->prev)
+				*list = (*list)->prev;
 			print_list(*list);
 		}
-		if (aux->next == NULL)
-			break;
-		if (aux->n < aux->next->n)
-			aux = aux->next;
+		if (head)
+			head = head->next;
 	}
 }
