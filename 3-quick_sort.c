@@ -36,7 +36,7 @@ void QuickSort(int *array, int pos_ini, int pos_fin, size_t size)
 			}
 		}
 	}
-    i++;
+	i++;
 	if (array[i] > array[pivot])
 	{
 		aux = array[i];
