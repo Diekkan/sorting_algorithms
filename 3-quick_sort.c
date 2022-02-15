@@ -20,7 +20,7 @@ void QuickSort(int *array, int pos_ini, int pos_fin, size_t size)
 {
 	int pivot = pos_fin, j = pos_ini, i = pos_ini - 1, aux;
 
-	if (!array || pos_ini == pos_fin)
+	if (!array || pos_ini == pos_fin || pos_fin == -1)
 		return;
 	for (; j < pos_fin; j++)
 	{
