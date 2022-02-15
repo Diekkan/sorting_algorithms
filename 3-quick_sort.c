@@ -20,7 +20,7 @@ void QuickSort(int *array, int pos_ini, int pos_fin, size_t size)
 {
 	int pivot = pos_fin, j = pos_ini, i = pos_ini - 1, aux;
 
-	if (!array || pos_ini == pos_fin || pos_fin == -1)
+	if (!array || pos_fin == -1 || array[pos_ini] == array[pivot])
 		return;
 	for (; j < pos_fin; j++)
 	{
@@ -36,15 +36,16 @@ void QuickSort(int *array, int pos_ini, int pos_fin, size_t size)
 			}
 		}
 	}
-	if (array[i + 1] > array[pivot])
+    i++;
+	if (array[i] > array[pivot])
 	{
-		aux = array[i + 1];
-		array[i + 1] = array[pivot];
+		aux = array[i];
+		array[i] = array[pivot];
 		array[pivot] = aux;
 		print_array(array, size);
 	}
-	if (pos_ini <= i)
-		QuickSort(array, pos_ini, i, size);
+	if (pos_ini <= i - 1)
+		QuickSort(array, pos_ini, i - 1, size);
 	if (i + 1 <= pos_fin)
 		QuickSort(array, i + 1, pos_fin, size);
 }
