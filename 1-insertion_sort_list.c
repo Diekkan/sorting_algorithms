@@ -11,10 +11,10 @@ void insertion_sort_list(listint_t **list)
 
 	if (!list || !*list || (*list)->next == NULL)
 		return;
-	while (aux)
+	while (aux != NULL)
 	{
 		tmp = aux->next;
-		while (tmp && tmp->prev && tmp->n < tmp->prev->n)
+		while (tmp != NULL && tmp->prev != NULL && tmp->n < tmp->prev->n)
 		{
 			if (tmp->prev != NULL)
 				tmp->prev->next = tmp->next;
@@ -30,7 +30,7 @@ void insertion_sort_list(listint_t **list)
 				tmp->next->prev = tmp;
 			print_list(*list);
 		}
-		if (!aux->next)
+		if (aux->next == NULL)
 			break;
 		if (aux->n < aux->next->n)
 			aux = aux->next;
